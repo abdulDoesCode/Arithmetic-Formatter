@@ -58,4 +58,3 @@ def arithmetic_arranger(problems=None, val=True):
     return arranged_problems
 
 
-print(arithmetic_arranger())
