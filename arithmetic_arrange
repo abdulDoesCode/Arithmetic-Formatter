@@ -1,0 +1,65 @@
+from ast import operator
+from multiprocessing.sharedctypes import Value
+
+
+def arithmetic_arranger(problems , val = False ):
+
+    if len(problems) > 5: # checks the total
+        return "Error: Too many probelms."
+
+    # these are the variables that work on the String possitions 
+    first = ''
+    second = ''
+    third = ''
+    sumx = ''
+    # make check up to make sure you follow threw it all 
+    for problem in problems:
+        # this runs the checks for the problems given 
+        num1, operator, num2 = problem.split(" ")
+        # print (num1,num2,operator)
+        # print (type(num1),num2,operator)
+        if operator not in ('+','-'):
+            return "Error: Operator must be '+' or '-'."
+        if len(num1) >= 5 or len(num2) >= 5:
+            return "Error: numbers Cannot be more than four digits."
+        # if (int(num1).isnumeric() and int(num2).isnumeric()):
+        #     return "Error: questions must be numeric"
+        
+
+        # this will run the value for the problems 
+        sum = ''
+        if operator == "+":
+            sum = str(int(num1) + int(num2))
+        elif operator == "-":
+            sum = str(int(num1) - int(num2))
+        
+        # this will then arrange the strings to show in the wanted form 
+        length = max(len(num1), len(num2)) + 2 
+        top = str(num1).rjust(length)
+        bottom = operator + str (num2).rjust(length - 1)
+        line = ""
+        res = str(sum).rjust(length)
+        for s in range (length):
+            line += '-'
+        print(line)
+        if problem != problem [-1]:
+            first += top + '  '
+            second += bottom + '  '
+            third += line + '  '
+            sumx += res + '  '
+        else:
+            first += top 
+            second += bottom
+            third += line
+            sumx += res
+    
+    if Value:
+        string = first + '/n' + second + '/n' + line + 'n' + sum
+    else:
+        string = first + '/n' + second + '/n' + line + 'n'
+    return string
+
+# problems = ['32 + 8','1 - 3801', '9999 + 9999' , '523 - 49']
+# val = True
+
+# print(arithmetic_arranger(problems,val))
